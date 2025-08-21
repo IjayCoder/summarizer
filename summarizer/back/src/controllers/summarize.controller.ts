@@ -1,32 +1,21 @@
 import { Request, Response } from "express";
-import client from "../config/openai";
+import { summarizeText } from "../config/huggingface";
+import { summarySchema } from "../config/schema/summarizer.schema";
 
-export async function summarizeText(req: Request, res: Response) {
-  try {
-    // Validation avec Zod
-    const { text, wordCount } = summarizeSchema.parse(req.body);
+export const summarize = async (req: Request, res: Response) => {
+  const parsed = summarySchema.safeParse(req.body);
 
-    const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "system",
-          content: "You are a helpful assistant that summarizes text.",
-        },
-        {
-          role: "user",
-          content: `Summarize this text in about ${wordCount} words:\n\n${text}`,
-        },
-      ],
-    });
-
-    const summary = completion.choices[0].message.content;
-    res.json({ summary });
-  } catch (error: any) {
-    if (error.errors) {
-      // Erreurs de validation Zod
-      return res.status(400).json({ errors: error.errors });
-    }
-    res.status(500).json({ error: "Something went wrong" });
+  if (!parsed.success) {
+    return res.status(400).json({ errors: parsed.error.flatten() });
   }
-}
+
+  const { text, summaryLength } = parsed.data;
+
+  try {
+    const summary = await summarizeText(text, summaryLength);
+
+    res.status(200).json({ summary });
+  } catch (error) {
+    res.status(500).json({ messag: "Internal server error" });
+  }
+};
