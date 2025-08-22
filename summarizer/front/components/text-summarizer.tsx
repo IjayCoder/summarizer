@@ -46,7 +46,7 @@ export default function Component() {
     } catch (error) {
       setSummary("An error occurred while summarizing the text.");
       toast.error("Error", {
-        description: "n error occurred while summarizing the text.",
+        description: "An error occurred while summarizing the text.",
       });
     } finally {
       setIsLoading(false);

@@ -6,7 +6,7 @@ export const app = express();
 
 app.use(express.json());
 
-app.use(cors({ origin: process.env.CORS_ORIGIN }));
+app.use(cors({ origin: "https://summarizer.eya.digital/" }));
 
 app.use("/api", summarizerRoutes);
 
