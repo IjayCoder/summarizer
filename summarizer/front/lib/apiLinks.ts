@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = process.env.API;
 
 export const SummarizeText = async (text: string, summaryLength: number) => {
   const res = await fetch(`${API_URL}/api/summarize`, {
