@@ -1,4 +1,4 @@
-const API_URL = process.env.API;
+const API_URL = "https://summarizer-production-b52f.up.railway.app";
 
 export const SummarizeText = async (text: string, summaryLength: number) => {
   const res = await fetch(`${API_URL}/api/summarize`, {
