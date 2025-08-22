@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { summarizeText } from "../config/huggingface";
-import { summarySchema } from "../config/schema/summarizer.schema";
+import { summarySchema } from "../schema/summarizer.schema";
 
 export const summarize = async (req: Request, res: Response) => {
   const parsed = summarySchema.safeParse(req.body);
@@ -12,10 +12,14 @@ export const summarize = async (req: Request, res: Response) => {
   const { text, summaryLength } = parsed.data;
 
   try {
+    if (!text || !summaryLength) {
+      res.status(400).json({ message: "Fill all the fields" });
+      return;
+    }
     const summary = await summarizeText(text, summaryLength);
 
     res.status(200).json({ summary });
   } catch (error) {
-    res.status(500).json({ messag: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
