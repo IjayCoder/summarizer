@@ -1,4 +1,6 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+//const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const API_URL = "http://localhost:5000";
 
 export const SummarizeText = async (text: string, summaryLength: number) => {
   const res = await fetch(`${API_URL}/api/summarize`, {
