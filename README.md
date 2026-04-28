@@ -89,5 +89,5 @@ CORS_ORIGIN=http://localhost:3000
 
 **Yaji Nonfon** — Freelance Backend Developer
 - Portfolio: [yajidev.intlineconnect.com](https://yajidev.intlineconnect.com)
-- LinkedIn: [linkedin.com/in/yajinonfon-7185a12a9](https://linkedin.com/in/yajinonfon-7185a12a9)
+- LinkedIn: [linkedin.com/in/yajinonfon](https://linkedin.com/in/yajinonfon)
 - Email: sonagnonyaji@gmail.com
