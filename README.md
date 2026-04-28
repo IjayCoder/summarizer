@@ -1,4 +1,4 @@
-# AI Document Summarizer
+# AI Text Summarizer
 
 **AI-powered web application that generates concise summaries 
 from long-form text using the Hugging Face API.**
